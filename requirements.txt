@@ -1,0 +1,5 @@
+Pillow>=10
+numpy>=1.26
+pyserial>=3.5
+bleak>=0.22
+onnxruntime>=1.17   # optional: object detection (go to / follow me / what do you see)

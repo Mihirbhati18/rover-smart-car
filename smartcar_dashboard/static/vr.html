@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ROVER · VR View</title><link rel="stylesheet" href="/vr.css"></head>
+<body>
+<div id="stage">
+  <img id="feed" alt="Live car camera">
+  <svg id="detBoxes" aria-hidden="true"></svg>
+  <div id="noFeed" hidden>CAMERA OFFLINE<small>Connect IP Webcam on the main page</small></div>
+  <div class="scan"></div>
+  <div class="glow left" id="glowLeft"></div>
+  <div class="glow right" id="glowRight"></div>
+  <div class="glow front" id="glowFront"></div>
+  <div class="rear-note">REAR · NO SENSOR</div>
+  <div class="override" id="override">EMERGENCY OVERRIDE</div>
+
+  <header class="hud-top">
+    <div class="brand"><b>ROVER</b><span>VR DRIVE</span></div>
+    <div class="center-top">
+      <div class="compass"><div class="compass-strip" id="compass"></div><i></i></div>
+      <div class="doing" id="doing">OFFLINE</div>
+    </div>
+    <div class="status">
+      <span class="chip rec" id="recChip" hidden>● REC</span>
+      <span class="chip mission" id="missionChip" hidden>MISSION</span>
+      <span class="chip auto" id="autoChip" hidden>AUTOPILOT</span>
+      <span class="chip" id="engineChip">ENGINE OFF</span>
+      <span class="chip" id="linkChip">CAR —</span>
+      <span class="chip" id="camChip">CAM —</span>
+      <span class="chip sonar" id="sonarChip">FRONT — cm</span>
+      <button class="ghost" id="exit">EXIT VR</button>
+    </div>
+  </header>
+
+  <div class="command" id="command"></div>
+  <div class="auto-banner" id="autoBanner" hidden></div>
+  <div class="message" id="message" hidden></div>
+  <div class="error" id="error" hidden></div>
+
+  <aside class="report" id="report" hidden>
+    <div class="report-head"><span>ENVIRONMENT REPORT</span><time id="reportTime"></time><button class="ghost small" id="reportClose">✕</button></div>
+    <ul id="reportLines"></ul>
+    <div class="advice" id="reportAdvice"></div>
+  </aside>
+
+  <div class="minimap panel">
+    <div class="panel-label">PATH <span id="mapInfo">0 cm</span><button class="ghost small" id="resetPath">RESET</button></div>
+    <svg id="map" viewBox="-60 -60 120 120" preserveAspectRatio="xMidYMid meet" aria-label="Path minimap"></svg>
+    <div class="est">estimated from timing</div>
+  </div>
+
+  <div class="gauge panel">
+    <svg id="gauge" viewBox="-110 -110 220 180" aria-label="Speed level"></svg>
+    <div class="gauge-text"><b id="level">5</b><span>SPEED LEVEL</span><small id="speedEst">≈ 0 cm/s est.</small></div>
+  </div>
+
+  <div class="controls">
+    <button id="engine" class="engine">START ENGINE</button>
+    <button id="mic" class="mic" aria-pressed="false"><span class="dot"></span><span id="micLabel">MIC OFF</span></button>
+    <form id="cmdForm"><input id="cmdText" autocomplete="off" placeholder="Say or type: forward · turn right 30 · speed level 6 · autopilot 200 cm · go to the bottle · follow me · go home · stop"><button>SEND</button></form>
+    <button id="resume" class="resume" hidden>RESUME AUTO</button>
+    <button id="autoOff" class="ghost" hidden>CANCEL AUTO</button>
+    <button id="missionOff" class="ghost" hidden>STOP MISSION</button>
+    <button id="hold" class="hold">HOLD <small>SPACE</small></button>
+    <button id="estop" class="estop">E-STOP</button>
+  </div>
+  <div class="heard" id="heard"></div>
+</div>
+
+<div id="start">
+  <div class="start-card">
+    <div class="brand big"><b>ROVER</b><span>VR DRIVE</span></div>
+    <p>Full-screen voice driving with live camera, danger glows, speed levels and a path map.</p>
+    <ol>
+      <li>Connect the car (Bluetooth or USB) and the phone camera on the main page first.</li>
+      <li>Lift the wheels for the first test. Keep this tab in front.</li>
+      <li>Say <b>“forward”</b>, <b>“turn right 30 degrees and move forward”</b>, <b>“speed level 3”</b>, <b>“analyze”</b>, <b>“stop”</b>.</li>
+      <li>Missions: <b>“record route”</b> → drive → <b>“stop recording”</b>, then <b>“repeat route”</b> · <b>“go home”</b> · <b>“go to the bottle”</b> · <b>“follow me”</b> · <b>“what do you see?”</b> · <b>“stop following”</b>.</li>
+      <li>Autopilot: <b>“autopilot 200 cm”</b>. Correct it any time with <b>“left 20”</b> / <b>“dodge right”</b>; <b>“hold”</b> pauses, <b>“resume”</b> continues, <b>“cancel autopilot”</b> gives you control.</li>
+    </ol>
+    <p class="keys">Keys: W/↑ forward · S/↓ reverse · A/D turn 15° · SPACE hold · +/− speed · R analyze · M mic · Esc E-stop</p>
+    <p class="fine">Danger glows are warnings only. The car stops by itself if something is 12 cm or closer ahead, if this page closes, or if the connection drops. Distances, angles, speed and the path are estimates.</p>
+    <div class="start-actions"><button id="enter" class="engine">ENTER VR</button><a href="/" class="ghost">Back to dashboard</a></div>
+    <div class="error" id="startError" hidden></div>
+  </div>
+</div>
+<script>window.SESSION_TOKEN='__SESSION_TOKEN__';</script><script src="/vr.js"></script>
+</body></html>

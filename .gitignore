@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.log
+.venv/
+venv/
+models/*.onnx
+models/*.pt
+smartcar_dashboard/routes/
+.claude/
+.vscode/
